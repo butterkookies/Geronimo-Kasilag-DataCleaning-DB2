@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Bebas+Neue&family=Creepster&family=Fascinate&family=Permanent+Marker&family=Special+Elite&display=swap');
+
+/* Base Theme */
+body {
+    background-color: #f0f0f0;
+}
+
+.reveal {
+    font-family: 'Inter', sans-serif;
+    color: #333333;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    color: #111111;
+}
+
+.reveal h2 {
+    margin-bottom: 30px;
+}
+
+.reveal ul {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.reveal code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #d14;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Hyper-Realistic Backgrounds */
+.mesh-background {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -2;
+    background: radial-gradient(circle at top left, #F4A261, transparent 40%),
+                radial-gradient(circle at bottom right, #2A9D8F, transparent 40%),
+                radial-gradient(circle at center, #E9C46A, transparent 50%);
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: pulseMesh 15s infinite alternate;
+}
+
+@keyframes pulseMesh {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.4;
+    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15),
+                inset 0 0 0 1px rgba(255,255,255,0.4);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* Topic 1: Title Slide */
+.title-slide .maximalist-font {
+    font-size: 3.5em;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+.title-slide h3 {
+    font-size: 1.2em;
+    color: #444;
+    margin-top: -10px;
+}
+
+.title-slide p {
+    font-size: 0.8em;
+    margin-bottom: 40px;
+}
+
+.team-name {
+    margin-top: 50px;
+}
+
+.wordplay {
+    font-size: 0.6em !important;
+    font-style: italic;
+    color: #888;
+}
+
+/* Cutout Effect */
+.cutout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.cutout {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset 2px 2px 0 rgba(255,255,255,0.6);
+    border: 2px solid #000;
+    border-radius: 4px;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cutout:hover {
+    transform: scale(1.1) rotate(0deg) !important;
+    z-index: 10;
+}
+
+/* Mixed Media Alternate Styling */
+.cutout.c1 { background: #E63946; font-family: 'Permanent Marker', cursive; transform: rotate(-5deg); }
+.cutout.c2 { background: #F4A261; font-family: 'Special Elite', cursive; transform: rotate(3deg); color: #000; text-shadow: none; }
+.cutout.c3 { background: #2A9D8F; font-family: 'Creepster', cursive; transform: rotate(-2deg); }
+.cutout.c4 { background: #264653; font-family: 'Bebas Neue', sans-serif; transform: rotate(6deg); }
+.cutout.c5 { background: #E9C46A; font-family: 'Fascinate', cursive; transform: rotate(-4deg); color: #000; text-shadow: none; }
+.cutout.c6 { background: #E63946; font-family: 'Inter', sans-serif; transform: rotate(2deg); }
+.cutout.c7 { background: #F4A261; font-family: 'Special Elite', cursive; transform: rotate(-6deg); color: #000; text-shadow: none;}
+.cutout.c8 { background: #2A9D8F; font-family: 'Permanent Marker', cursive; transform: rotate(4deg); }
+
+/* Stats & Visuals Layout */
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.stat-card {
+    background: #fdfbf7;
+    border: 2px solid #111;
+    padding: 20px 30px;
+    border-radius: 4px;
+    box-shadow: 8px 8px 0px #F4A261, 12px 12px 20px rgba(0,0,0,0.15); 
+    min-width: 250px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) translateX(-5px) translateZ(20px);
+    box-shadow: 12px 12px 0px #F4A261, 18px 18px 30px rgba(0,0,0,0.2);
+}
+
+.stat-card.alert-card { box-shadow: 8px 8px 0px #E63946; }
+.stat-card.alert-card:hover { box-shadow: 12px 12px 0px #E63946; }
+.stat-card.success-card { box-shadow: 8px 8px 0px #2A9D8F; }
+.stat-card.success-card:hover { box-shadow: 12px 12px 0px #2A9D8F; }
+
+.stat-value {
+    font-size: 3.5rem;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #222;
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Visuals */
+.visual-container {
+    margin-top: 30px;
+    border: 3px solid #111;
+    box-shadow: 10px 10px 0px #264653, 15px 15px 25px rgba(0,0,0,0.2);
+    background: #f4f1ea;
+    padding: 15px;
+    display: inline-block;
+    max-width: 90%;
+    position: relative;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.visual-container:hover {
+    transform: scale(1.02) rotate(-1deg);
+}
+
+.visual-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    filter: contrast(1.05) saturate(1.1);
+}
+
+/* Mixed Media Tape Effects */
+.tape {
+    position: absolute;
+    width: 130px;
+    height: 35px;
+    background-color: rgba(233, 196, 106, 0.7);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    z-index: 10;
+    backdrop-filter: blur(2px);
+}
+
+.tape.top-center { top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); }
+.tape.top-left { top: -15px; left: -20px; transform: rotate(-15deg); }
+.tape.top-right { top: -15px; right: -20px; transform: rotate(10deg); }
+.tape.bottom-right { bottom: -15px; right: -10px; transform: rotate(-5deg); }
+.tape.red-tape { background-color: rgba(230, 57, 70, 0.7); }
+.tape.blue-tape { background-color: rgba(38, 70, 83, 0.7); }
+.tape.yellow-tape { background-color: rgba(244, 162, 97, 0.7); }
+
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #E63946;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-right: 8px;
+    box-shadow: 1px 1px 0 #000;
+}

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MovieData Insights - Dataset Overview</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;700&amp;family=Outfit:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f0edec",
+                      "primary-container": "#f9f6ee",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#fff4f3",
+                      "primary": "#5f5e58",
+                      "primary-fixed-dim": "#c9c6bf",
+                      "on-tertiary-container": "#cf3645",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c9c7be",
+                      "secondary-fixed": "#f7e526",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#1c1c17",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "mint-green": "#38B000",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#474741",
+                      "surface-bright": "#fcf9f8",
+                      "surface-variant": "#e5e2e1",
+                      "outline": "#787770",
+                      "on-primary": "#ffffff",
+                      "canvas-cream": "#F9F6EE",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-secondary-container": "#6d6400",
+                      "on-error-container": "#93000a",
+                      "shadow-tint": "rgba(0,0,0,0.2)",
+                      "on-surface-variant": "#474740",
+                      "secondary": "#686000",
+                      "inverse-primary": "#c9c6bf",
+                      "surface-tint": "#5f5e58",
+                      "surface-container-high": "#ebe7e7",
+                      "on-tertiary-fixed-variant": "#920020",
+                      "charcoal-ink": "#111111",
+                      "vibrant-blue": "#35A7FF",
+                      "tertiary-fixed-dim": "#ffb3b3",
+                      "on-primary-container": "#72716a",
+                      "inverse-on-surface": "#f3f0ef",
+                      "secondary-container": "#f4e322",
+                      "surface-container-low": "#f6f3f2",
+                      "surface": "#fcf9f8",
+                      "primary-fixed": "#e5e2db",
+                      "secondary-fixed-dim": "#dac900",
+                      "surface-dim": "#dcd9d9",
+                      "on-secondary-fixed-variant": "#4e4800",
+                      "inverse-surface": "#313030",
+                      "tertiary-fixed": "#ffdad9",
+                      "on-background": "#1c1b1b",
+                      "highlighter-yellow": "#F9E728",
+                      "background": "#fcf9f8",
+                      "on-tertiary-fixed": "#410009",
+                      "neon-pink": "#FF5964",
+                      "tertiary": "#b52234",
+                      "on-surface": "#1c1b1b",
+                      "on-secondary-fixed": "#1f1c00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "hard-shadow-offset": "8px",
+                      "gutter": "24px",
+                      "margin-desktop": "48px",
+                      "unit": "8px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-caps": ["Outfit"],
+                      "display-lg-mobile": ["Outfit"],
+                      "headline-accent": ["Instrument Serif"],
+                      "display-lg": ["Outfit"],
+                      "body-lg": ["Inter"],
+                      "display-xl": ["Outfit"],
+                      "annotation": ["Caveat"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["14px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "display-lg-mobile": ["48px", {"lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                      "headline-accent": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                      "display-lg": ["64px", {"lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-xl": ["96px", {"lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "annotation": ["24px", {"lineHeight": "24px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .hard-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(17, 17, 17, 0.2);
+        }
+        .hard-shadow-active:active {
+            transform: translate(8px, 8px);
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+        }
+        .tape-strip {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            width: 80px;
+            height: 24px;
+            transform: rotate(-2deg);
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.4;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 30px) scale(1.1); }
+        }
+        .polaroid-frame {
+            background: white;
+            padding: 12px 12px 48px 12px;
+            box-shadow: 8px 8px 0px 0px rgba(17, 17, 17, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-canvas-cream font-body-md text-charcoal-ink overflow-hidden min-h-screen">
+<!-- Background Orbs -->
+<div class="blob bg-vibrant-blue w-[400px] h-[400px] top-[-100px] left-[-50px]"></div>
+<div class="blob bg-neon-pink w-[350px] h-[350px] bottom-[-50px] right-[100px]" style="animation-delay: -5s;"></div>
+<div class="blob bg-mint-green w-[300px] h-[300px] top-[40%] right-[-100px]" style="animation-delay: -12s;"></div>
+<!-- Top Navigation (Shell Implementation) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-canvas-cream">
+<h1 class="font-display-lg text-[24px] md:text-[32px] font-headline-accent text-charcoal-ink">MovieData Insights</h1>
+<div class="hidden md:flex gap-gutter items-center">
+<nav class="flex gap-6">
+<a class="text-neon-pink font-bold font-label-caps text-label-caps hover:rotate-2 transition-transform duration-200" href="#">Overview</a>
+<a class="text-charcoal-ink opacity-70 font-label-caps text-label-caps hover:rotate-2 transition-transform duration-200" href="#">Revenue</a>
+<a class="text-charcoal-ink opacity-70 font-label-caps text-label-caps hover:rotate-2 transition-transform duration-200" href="#">Genres</a>
+<a class="text-charcoal-ink opacity-70 font-label-caps text-label-caps hover:rotate-2 transition-transform duration-200" href="#">Cast</a>
+</nav>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-charcoal-ink opacity-70 hover:rotate-2 transition-transform cursor-pointer">database</span>
+<span class="material-symbols-outlined text-charcoal-ink opacity-70 hover:rotate-2 transition-transform cursor-pointer">analytics</span>
+</div>
+</div>
+</header>
+<!-- Side Navigation (Shell Implementation - Desktop Only) -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r-2 border-charcoal-ink bg-surface-container hidden lg:flex flex-col p-6 z-40 hard-shadow">
+<div class="mb-12">
+<h2 class="font-headline-accent text-headline-accent text-tertiary mb-1">Project Archives</h2>
+<p class="font-annotation text-annotation leading-tight text-primary">IMDb Top 1000 Analysis</p>
+</div>
+<nav class="flex-grow space-y-4">
+<div class="flex items-center gap-3 p-3 bg-highlighter-yellow text-charcoal-ink font-bold -rotate-1 translate-x-2 translate-y-2 cursor-pointer transition-transform">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Overview</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant cursor-pointer transition-transform hover:-rotate-2">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps">Revenue</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant cursor-pointer transition-transform hover:-rotate-2">
+<span class="material-symbols-outlined">movie_filter</span>
+<span class="font-label-caps text-label-caps">Genres</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant cursor-pointer transition-transform hover:-rotate-2">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps">Cast</span>
+</div>
+</nav>
+<button class="mt-auto bg-neon-pink text-white font-label-caps text-label-caps py-4 px-6 hard-shadow hard-shadow-active transition-transform hover:rotate-2">
+            Export Report
+        </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full min-h-screen pt-24 lg:pl-72 px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center">
+<!-- Header Text -->
+<div class="text-center max-w-4xl mb-12 relative">
+<h1 class="font-display-xl text-display-lg-mobile md:text-display-xl uppercase tracking-tighter text-charcoal-ink mb-2">
+                THE TOP 1000 MOVIES DATASET
+            </h1>
+<p class="font-headline-accent text-[24px] md:text-headline-accent italic text-primary">
+                Examining trends, genres, and financial performance
+            </p>
+</div>
+<!-- Scrapbook Layout Container -->
+<div class="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center">
+<!-- Central Yellow Sticky Note -->
+<div class="relative z-30 bg-highlighter-yellow p-8 md:p-12 hard-shadow rotate-[1.5deg] max-w-xs md:max-w-md">
+<!-- Tape -->
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 tape-strip"></div>
+<div class="text-center">
+<p class="font-annotation text-[32px] md:text-[42px] leading-tight text-charcoal-ink">
+                        1000 Records |<br/>$10B+ Gross Revenue
+                    </p>
+</div>
+</div>
+<!-- Scattered Polaroids -->
+<!-- Polaroid 1: Palace Theatre (https://lh3.googleusercontent.com/aida-public/AB6AXuBLfMf8Amr67Y3ljV_dmhFI3qAW3gGDSfB9XzXGc55wU0rISRStmLBKrL7BMlWx2NIqpLABH92rb8KBTG_fKrSixjLG7xhzf9bGnSfoF2NJK0NvBKOIWhN--kewT9-fjjmnJSev0d8-FCva0he1agpvcmqxBewUL6lO34NxpGB68jv2LhhnJ0FbAOd2W584NkgWdS3nB_HcYDBz2lrHj9EEO3Hct6Q3An4AP4IBx4q-GdiL2MmJ1v9ITkZo5WzpwYVshjGTa4fZGV-3) -->
+<div class="absolute z-20 top-0 left-4 md:left-20 rotate-[-8deg] hover:z-50 hover:rotate-0 transition-all duration-300">
+<div class="polaroid-frame w-48 md:w-64">
+<div class="aspect-square bg-surface-variant overflow-hidden mb-3">
+<img alt="Vintage Palace Theatre" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLfMf8Amr67Y3ljV_dmhFI3qAW3gGDSfB9XzXGc55wU0rISRStmLBKrL7BMlWx2NIqpLABH92rb8KBTG_fKrSixjLG7xhzf9bGnSfoF2NJK0NvBKOIWhN--kewT9-fjjmnJSev0d8-FCva0he1agpvcmqxBewUL6lO34NxpGB68jv2LhhnJ0FbAOd2W584NkgWdS3nB_HcYDBz2lrHj9EEO3Hct6Q3An4AP4IBx4q-GdiL2MmJ1v9ITkZo5WzpwYVshjGTa4fZGV-3"/>
+</div>
+<p class="font-annotation text-annotation leading-none">The Palace Theatre - Night Magic</p>
+</div>
+</div>
+<!-- Polaroid 2: Clapperboard (https://lh3.googleusercontent.com/aida-public/AB6AXuA4KIyT7pSzVZuk_SpVnvH7svUZYUp2UckOJBHPYVxSwSarKo41qGZ_btRyr-bXMYYm3qbBPgdFLpGOHMHZJopGCTtQxMHTq4PtBZNSi7YG1ovEfEJ2e8xNf_iTO_xmdK_2f3_qh5ex2ezlSl6b2NnBv2Ags-QgBosOlFDxw_LUw8-MgxxUwo45-33D8Tc_RmNNBX3og6tXovpliv5bVye99w4QE1Yl6hc3WgMNzfgVZBhz7lVZpnt0Woi8rxZeDI4RJza8eEblPls0) -->
+<div class="absolute z-20 bottom-0 left-8 md:left-12 rotate-[5deg] hover:z-50 hover:rotate-0 transition-all duration-300">
+<div class="polaroid-frame w-40 md:w-56">
+<div class="aspect-square bg-surface-variant overflow-hidden mb-3">
+<img alt="Vintage Movie Clapperboard" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4KIyT7pSzVZuk_SpVnvH7svUZYUp2UckOJBHPYVxSwSarKo41qGZ_btRyr-bXMYYm3qbBPgdFLpGOHMHZJopGCTtQxMHTq4PtBZNSi7YG1ovEfEJ2e8xNf_iTO_xmdK_2f3_qh5ex2ezlSl6b2NnBv2Ags-QgBosOlFDxw_LUw8-MgxxUwo45-33D8Tc_RmNNBX3og6tXovpliv5bVye99w4QE1Yl6hc3WgMNzfgVZBhz7lVZpnt0Woi8rxZeDI4RJza8eEblPls0"/>
+</div>
+<p class="font-annotation text-annotation leading-none text-center">Scene 4, Oct 1984</p>
+</div>
+</div>
+<!-- Polaroid 3: Projector (https://lh3.googleusercontent.com/aida-public/AB6AXuC5vEmQ6GeS8U86tz5SVfBCk5aO1TRilVvaiAS7atm213_USeVXZuKHLG3KpA00EIIJ3j3qSZvPLv_96kgjYoMAEXVgRl94Bl_CcjB3N094xKR_74QntrkOtcXGecto5bcZDv3sgEXR_rZ86We9NVsd5uUP2TuAqnqzXG-_maVCRiAiyNab-_n5O4rUT2ncENhhUoxoPQT8_IYx6cbhdiCxNE4cfAb5OyRJXc-Ac4JrolFYQHvdmaz466avWeRpxdZqu2K7G_RR7VbP) -->
+<div class="absolute z-20 top-4 right-4 md:right-16 rotate-[12deg] hover:z-50 hover:rotate-0 transition-all duration-300">
+<div class="polaroid-frame w-44 md:w-60">
+<div class="aspect-square bg-surface-variant overflow-hidden mb-3">
+<img alt="Retro Film Projector" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5vEmQ6GeS8U86tz5SVfBCk5aO1TRilVvaiAS7atm213_USeVXZuKHLG3KpA00EIIJ3j3qSZvPLv_96kgjYoMAEXVgRl94Bl_CcjB3N094xKR_74QntrkOtcXGecto5bcZDv3sgEXR_rZ86We9NVsd5uUP2TuAqnqzXG-_maVCRiAiyNab-_n5O4rUT2ncENhhUoxoPQT8_IYx6cbhdiCxNE4cfAb5OyRJXc-Ac4JrolFYQHvdmaz466avWeRpxdZqu2K7G_RR7VbP"/>
+</div>
+<p class="font-annotation text-annotation leading-none">Film Night, Oct '77</p>
+</div>
+</div>
+<!-- Small Floating Notes/Accents -->
+<div class="absolute top-[20%] right-[30%] z-40 bg-neon-pink p-3 text-white hard-shadow -rotate-6 hidden md:block">
+<p class="font-annotation text-xl">Top Rated!</p>
+</div>
+<div class="absolute bottom-[20%] right-[10%] z-40 bg-vibrant-blue p-4 text-white hard-shadow rotate-3 hidden md:block">
+<p class="font-annotation text-xl">Data Viz Insight #12</p>
+</div>
+</div>
+</main>
+<!-- Footer (Shell Implementation) -->
+<footer class="fixed bottom-0 left-0 w-full flex justify-end items-end pointer-events-none pb-8 pr-12 z-50">
+<div class="pointer-events-auto bg-white/40 backdrop-blur-sm p-4 rotate-[-1deg]">
+<p class="font-annotation text-annotation text-primary">Prepared by Geronimo &amp; Kasilag</p>
+<div class="flex gap-4 mt-1">
+<a class="font-annotation text-[18px] text-charcoal-ink opacity-80 hover:text-neon-pink transition-colors pointer-events-auto" href="#">Methodology</a>
+<a class="font-annotation text-[18px] text-charcoal-ink opacity-80 hover:text-neon-pink transition-colors pointer-events-auto" href="#">Data Source</a>
+<a class="font-annotation text-[18px] text-charcoal-ink opacity-80 hover:text-neon-pink transition-colors pointer-events-auto" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Elements react slightly to mouse movement
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) / 100;
+            const y = (e.clientY - window.innerHeight / 2) / 100;
+            
+            const mainContent = document.querySelector('main');
+            mainContent.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        
+        // Active state physical push down effect
+        const buttons = document.querySelectorAll('.hard-shadow-active');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('translate-x-2', 'translate-y-2');
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('translate-x-2', 'translate-y-2');
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('translate-x-2', 'translate-y-2');
+            });
+        });
+    </script>
+</body></html>
