@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies Data Cleaning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --netflix-red: #E50914; --dark-bg: #141414; }
+        body { margin: 0; background-color: var(--dark-bg); color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; }
+        .slide { display: none; width: 100vw; height: 100vh; padding: 4rem 8rem; box-sizing: border-box; flex-direction: column; justify-content: center; position: absolute; top: 0; left: 0; z-index: 2; }
+        .slide.active { display: flex; animation: fadein 0.8s ease-out forwards; }
+        @keyframes fadein { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        .bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.15; object-fit: cover; filter: blur(5px) grayscale(50%); transition: opacity 1s; }
+        .bg-gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(to top, rgba(20,20,20,1) 10%, rgba(20,20,20,0.4) 100%); }
+        
+        h1, h2, h3 { font-family: 'Bebas Neue', cursive; color: #fff; margin-bottom: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+        h1 { font-size: 7rem; line-height: 0.9; margin-bottom: 0.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        h1 span { color: var(--netflix-red); }
+        h2 { font-size: 4rem; color: var(--netflix-red); border-bottom: 2px solid var(--netflix-red); display: inline-block; padding-bottom: 0.5rem; }
+        p, li { font-size: 1.5rem; line-height: 1.6; color: #ccc; font-weight: 300; }
+        
+        .flex-layout { display: flex; gap: 4rem; align-items: center; height: 100%; }
+        .flex-col { flex: 1; }
+        
+        .code-box { background-color: rgba(0,0,0,0.7); padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 1.1rem; color: #00ff00; border-left: 4px solid var(--netflix-red); white-space: pre; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+        
+        .poster-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; perspective: 1000px; }
+        .poster { width: 100%; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+        .poster:hover { transform: scale(1.1) translateZ(50px); z-index: 10; border: 2px solid var(--netflix-red); }
+        
+        .metrics-container { display: flex; gap: 2rem; margin-top: 2rem; }
+        .metric { background-color: rgba(20,20,20,0.8); padding: 2rem; border-radius: 12px; text-align: center; flex: 1; border: 1px solid #333; transition: transform 0.3s; }
+        .metric:hover { transform: translateY(-10px); border-color: var(--netflix-red); }
+        .metric-value { font-size: 5rem; font-family: 'Bebas Neue', cursive; color: var(--netflix-red); text-shadow: 0 0 20px rgba(229, 9, 20, 0.5); }
+        
+        .nav-hint { position: fixed; bottom: 20px; right: 20px; font-size: 1rem; color: rgba(255,255,255,0.3); z-index: 100; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 1.2rem; background: rgba(0,0,0,0.6); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid #333; padding: 15px; text-align: left; }
+        .intro-container { display: flex; width: 100vw; height: 100vh; background-color: #000; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; z-index: 100; flex-direction: column; }
+        .kasinimo-logo { font-family: 'Bebas Neue', cursive; font-size: 15rem; color: var(--netflix-red); text-shadow: 0 0 50px var(--netflix-red); animation: netflixZoom 4s cubic-bezier(0.1, 0.9, 0.2, 1) forwards; }
+        @keyframes netflixZoom { 0% { transform: scale(5); opacity: 0; } 10% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .intro-container.fade-out { animation: fadeOutIntro 1s ease forwards; }
+        @keyframes fadeOutIntro { to { opacity: 0; visibility: hidden; } }
+    </style>
+</head>
+<body>
+
+    <!-- Netflix Intro -->
+    <div class="intro-container" id="netflix-intro">
+        <div class="kasinimo-logo">KASINIMO</div>
+    </div>
+
+    <img src="assets/Blood_Red_Sky.jpg" class="bg-layer" id="bg-img" alt="Background">
+    <div class="bg-gradient"></div>
+
+    <!-- Slide 1: Title & Acquisition -->
+    <div class="slide">
+        <div class="flex-layout">
+            <div class="flex-col">
+                <h1>Data Cleaning<br><span>The Series</span></h1>
+                <p>A comprehensive pipeline for identifying and handling messy data in entertainment datasets.</p>
+                <div style="margin-top: 3rem; background: rgba(0,0,0,0.5); padding: 2rem; border-left: 5px solid var(--netflix-red); border-radius: 0 10px 10px 0;">
+                    <h3 style="color: #fff; margin:0 0 10px 0; font-size: 2rem;">Dataset Details</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li><strong style="color: var(--netflix-red);">Title:</strong> movies.csv</li>
+                        <li><strong style="color: var(--netflix-red);">Acquisition:</strong> Downloaded from Kaggle</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex-col poster-grid">
+                <img src="assets/Blood_Red_Sky.jpg" class="poster" alt="Movie">
+                <img src="assets/Army_of_Thieves.jpg" class="poster" alt="Movie" style="transform: translateY(20px);">
+                <img src="assets/Blood_Red_Sky.jpg" class="poster" alt="Movie" style="filter: hue-rotate(90deg);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Present Dataset -->
+    <div class="slide">
+        <h2>S01E01: The Messy Truth</h2>
+        <div class="flex-layout">
+            <div class="flex-col">
+                <p>Before any analysis can begin, we must uncover the hidden anomalies. Our initial inspection focused on finding the exact gaps in our 9,999 entries.</p>
+                <p>By leveraging pandas, we mapped the topology of missing values across crucial columns like Year and Rating.</p>
+            </div>
+            <div class="flex-col">
+                <div class="code-box">
+# The hunt for missing values begins
+import pandas as pd
+df = pd.read_csv("movies.csv")
+
+df.isnull().sum()
+> MOVIES         0
+> YEAR         644
+> RATING      1820...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Cleaning Processes (Duplicates) -->
+    <div class="slide">
+        <h2>S01E02: Cloning Error</h2>
+        <div class="flex-layout">
+            <div class="flex-col">
+                <div class="code-box">
+# Purging the system of clones
+df_clean = df.drop_duplicates()
+
+print("Duplicate rows:", df.duplicated().sum())
+> Duplicate rows: 431
+                </div>
+            </div>
+            <div class="flex-col">
+                <p>We identified a massive influx of duplicate entries—431 exact clones skewing the dataset.</p>
+                <p>Using built-in deduplication methods, we instantly purged these anomalies, restoring balance to the initial rows.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Cleaning Processes (Missing Values) -->
+    <div class="slide">
+        <h2>S01E03: The Rating Purge</h2>
+        <p>A movie without a rating is useless to our "Highly Rated" analysis. We made the hard decision to drop any entity lacking a RATING.</p>
+        <div class="flex-layout">
+            <div class="flex-col poster-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <img src="assets/Army_of_Thieves.jpg" class="poster" alt="Movie">
+                <div style="display:flex; align-items:center; justify-content:center; border: 2px dashed #333; border-radius: 8px; color: #666;">
+                    Data Purged
+                </div>
+            </div>
+            <div class="flex-col">
+                <div class="code-box">
+# Executing the final purge
+df_clean = df_clean.dropna(subset=['RATING'])
+print("Shape after cleaning:", df_clean.shape)
+
+> Shape after cleaning: (8157, 12)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: After Cleaning -->
+    <div class="slide">
+        <h2>Season Finale: Metrics</h2>
+        <div class="metrics-container">
+            <div class="metric">
+                <div style="font-weight:700; text-transform:uppercase;">Raw Rows</div>
+                <div class="metric-value">9,999</div>
+            </div>
+            <div class="metric">
+                <div style="font-weight:700; text-transform:uppercase;">Cleaned Rows</div>
+                <div class="metric-value">8,157</div>
+            </div>
+            <div class="metric" style="border-color: var(--netflix-red);">
+                <div style="font-weight:700; text-transform:uppercase; color: #fff;">Anomalies Purged</div>
+                <div class="metric-value">1,842</div>
+            </div>
+        </div>
+        <div style="margin-top: 2rem;">
+            <table>
+                <tr><th>MOVIES</th><th>YEAR</th><th>GENRE</th><th>RATING</th></tr>
+                <tr><td>Blood Red Sky</td><td>2021</td><td>Action, Horror</td><td>6.1</td></tr>
+                <tr><td>The Walking Dead</td><td>2010</td><td>Drama, Horror</td><td>8.2</td></tr>
+                <tr><td>Rick and Morty</td><td>2013</td><td>Animation, Adventure</td><td>9.2</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 6: Conclusion -->
+    <div class="slide" style="align-items: center; text-align: center;">
+        <h1 style="font-size: 8rem; margin-top: 0;">Conclusion</h1>
+        <p style="max-width: 800px; font-size: 1.8rem; margin: 2rem 0;">The <strong>movies.csv</strong> dataset has been successfully scrubbed, reducing noise from duplicates and resolving fatal missing values.</p>
+        <p style="max-width: 800px; font-size: 1.8rem;">The data is now pristine, ready for advanced Exploratory Data Analysis to uncover the next highly rated blockbuster.</p>
+        <h2 style="margin-top: 4rem; border: none; font-size: 6rem;">Fin.</h2>
+    </div>
+
+    <!-- Slide 7: Analysis -->
+    <div class="slide">
+        <h2>S02E01: The True Blockbusters</h2>
+        <div class="flex-layout">
+            <div class="flex-col">
+                <p style="font-size: 1.8rem; color: #fff; margin-bottom: 2rem;">By fusing normalized gross profits with audience ratings, the data reveals the definitive answer to the ultimate question.</p>
+                
+                <div style="background: rgba(229, 9, 20, 0.1); border-left: 5px solid var(--netflix-red); padding: 1.5rem; margin-bottom: 1.5rem;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 2.5rem; color: var(--netflix-red);">#1 The Undisputed King: Musicals</h3>
+                    <p style="margin: 0; font-size: 1.4rem;">With a towering combined score of <strong>0.875</strong>, Musicals dominate the industry. They uniquely marry high box-office gross with critical acclaim, proving to be the most lucrative and beloved genre.</p>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.05); border-left: 5px solid #888; padding: 1.5rem;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 2rem; color: #ccc;">The Runners-Up</h3>
+                    <p style="margin: 0; font-size: 1.3rem;"><strong>Adventure (0.805)</strong> and <strong>Animation (0.709)</strong> follow closely behind. These genres rely on spectacle and family-friendly appeal, securing massive global audiences and consistent high ratings.</p>
+                </div>
+            </div>
+            <div class="flex-col poster-grid" style="grid-template-columns: repeat(2, 1fr); max-height: 70vh; gap: 1rem;">
+                <img src="assets/La_La_Land.jpg" class="poster" style="height: 35vh; object-fit: cover;" alt="Musical">
+                <img src="assets/Interstellar.jpg" class="poster" style="height: 35vh; object-fit: cover;" alt="Adventure">
+                <img src="assets/Spider-Man.jpg" class="poster" style="height: 35vh; object-fit: cover;" alt="Animation">
+                <img src="assets/The_Dark_Knight.jpg" class="poster" style="height: 35vh; object-fit: cover;" alt="Action">
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint">Use arrow keys (← →) or click to navigate</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const bgImg = document.getElementById('bg-img');
+        const backgrounds = ['assets/Blood_Red_Sky.jpg', 'assets/Army_of_Thieves.jpg', 'assets/Blood_Red_Sky.jpg', 'assets/The_Walking_Dead.jpg', 'assets/Rick_and_Morty.jpg', 'assets/Blood_Red_Sky.jpg', 'assets/Interstellar.jpg'];
+        let currentSlide = 0;
+
+        const intro = document.getElementById('netflix-intro');
+        setTimeout(() => {
+            intro.classList.add('fade-out');
+            setTimeout(() => {
+                showSlide(0);
+            }, 1000);
+        }, 4000);
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            
+            // Swap background gently
+            if(backgrounds[index % backgrounds.length]) {
+                bgImg.style.opacity = 0;
+                setTimeout(() => {
+                    bgImg.src = backgrounds[index % backgrounds.length];
+                    bgImg.style.opacity = 0.15;
+                }, 500);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+    </script>
+</body>
+</html>
