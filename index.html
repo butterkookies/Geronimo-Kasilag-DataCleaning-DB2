@@ -2,298 +2,261 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Movies Dataset - Feature Extraction & Prediction</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    
-    <!-- Link to custom styles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Dataset - Data Cleaning & EDA Presentation</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="noise-overlay"></div>
-    <div class="mesh-background"></div>
-    <div class="reveal">
-        <div class="slides">
-            <!-- Topic 1: Data Set Title -->
-            <section id="slide-1" class="title-slide">
-                <div class="glass-panel gsap-fade">
-                    <h1 class="maximalist-font">Movies Dataset</h1>
-                    <h3>Feature Extraction & Prediction</h3>
-                    <p>Data Cleaning and Exploratory Data Analysis</p>
-                    <div class="team-name">
-                        <p class="wordplay">by</p>
-                        <div class="cutout-wrapper">
-                            <!-- Cutout CSS effect for Kasinimo -->
-                            <span class="cutout c1">K</span>
-                            <span class="cutout c2">a</span>
-                            <span class="cutout c3">s</span>
-                            <span class="cutout c4">i</span>
-                            <span class="cutout c5">n</span>
-                            <span class="cutout c6">i</span>
-                            <span class="cutout c7">m</span>
-                            <span class="cutout c8">o</span>
-                        </div>
-                        <p class="wordplay">(Kasilag + Geronimo) - <em style="color:#d9d9d9">a wordplay for cinema + you</em></p>
+    <div class="presentation-container">
+        <!-- Top Navigation Bar -->
+        <div class="top-bar">
+            <div class="brand-badge">
+                <span class="brand-logo">KASINIMO</span>
+                <span class="brand-title">IT31-DB2 Data Cleaning Report</span>
+            </div>
+            <div class="top-controls">
+                <button class="icon-btn" id="overview-btn" title="Slide Overview (Press O)">
+                    <span>☰</span> Overview
+                </button>
+                <button class="icon-btn" id="fullscreen-btn" title="Toggle Fullscreen (Press F)">
+                    <span>⛶</span> Fullscreen
+                </button>
+            </div>
+        </div>
+
+        <!-- Slide Viewport -->
+        <div class="slide-viewport">
+
+            <!-- Slide 1: Scope 1 - Data Set Title -->
+            <div class="slide active">
+                <div class="slide-card hero-slide">
+                    <span class="scope-badge">Scope 1 • Data Set Title</span>
+                    <h1 class="main-title">Movies Dataset</h1>
+                    <p class="slide-subtitle">Feature Extraction & Data Cleaning Analysis</p>
+
+                    <div class="wordplay-pill">
+                        <span>🎬 Presenters:</span>
+                        <strong>Kasinimo</strong> (Kasilag + Geronimo)
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Topic 2: Acquisition -->
-            <section id="slide-2">
-                <div class="glass-panel gsap-slide-up">
-                    <h2>Data Source</h2>
-                    <p>The raw data (<code>movies.csv</code>) was downloaded from Kaggle.</p>
-                    <div class="tape top-center"></div>
-                    <p class="sub-text" style="color:#111; font-weight:bold;">Dataset: <strong>movies-dataset-for-feature-extracion-prediction</strong></p>
-                </div>
-            </section>
-            
-            <section id="slide-3">
-                <div class="glass-panel gsap-slide-up">
-                    <h2>Environment Setup</h2>
-                    <p>The dataset was loaded and processed in a <strong>Jupyter Notebook</strong> environment.</p>
-                    <p>We utilized the powerful data manipulation library, <strong>Pandas</strong>, to perform data cleaning and exploratory data analysis.</p>
-                </div>
-            </section>
-
-            <!-- Topic 3: Present Data set -->
-            <section id="slide-4">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Dataset Scope</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card gsap-pop">
-                            <div class="tape top-left"></div>
-                            <p class="stat-value">9,999</p>
-                            <p class="stat-label">Total Movie Records</p>
+            <!-- Slide 2: Scope 2 - Data Acquisition -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 2 • Data Acquisition</span>
+                            <h2 class="slide-title">How Data Was Acquired</h2>
                         </div>
                     </div>
-                    <div class="visual-container gsap-pop">
-                        <div class="tape top-center"></div>
-                        <img data-src="assets/year_distribution.png" alt="Year Distribution Chart">
-                    </div>
-                </div>
-            </section>
-            
-            <section id="slide-5">
-                <div class="glass-panel">
-                    <h2>Key Features</h2>
-                    <p class="gsap-fade">Highlighting the critical columns to be analyzed:</p>
-                    <ul style="list-style-type: none; padding:0;">
-                        <li class="gsap-stagger-item">🎬 <strong>MOVIES:</strong> The Title</li>
-                        <li class="gsap-stagger-item">📅 <strong>YEAR:</strong> Release Year</li>
-                        <li class="gsap-stagger-item">🎭 <strong>GENRE:</strong> Categories</li>
-                        <li class="gsap-stagger-item">⭐ <strong>RATING:</strong> Audience Score</li>
-                        <li class="gsap-stagger-item">🗳️ <strong>VOTES:</strong> Number of Ratings</li>
-                        <li class="gsap-stagger-item">💰 <strong>Gross:</strong> Revenue</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Topic 4: Issues Identified -->
-            <section id="slide-6">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Initial Checks & Missing Data</h2>
-                    <ul>
-                        <li class="gsap-stagger-item">Verified and removed <strong>duplicate rows</strong>.</li>
-                        <li class="gsap-stagger-item">Identified severe missing values in the dataset.</li>
-                    </ul>
-                    <div class="stats-grid">
-                        <div class="stat-card alert-card gsap-pop">
-                            <div class="tape top-right red-tape"></div>
-                            <p class="stat-value">9,539</p>
-                            <p class="stat-label">Nulls in Gross Column</p>
+                    <div class="grid-2">
+                        <div class="card-box">
+                            <h3>📦 Data Source</h3>
+                            <p style="margin-top:10px; color:var(--text-muted);">
+                                The raw movie dataset (<code>movies.csv</code>) was obtained from Kaggle's public repository for movie feature extraction and prediction tasks.
+                            </p>
+                        </div>
+                        <div class="card-box">
+                            <h3>🐍 Environment & Tools</h3>
+                            <ul class="classroom-list" style="margin-top:10px;">
+                                <li>
+                                    <span class="list-icon">📓</span>
+                                    <div><strong>Jupyter Notebook:</strong> Executed in Google Colab environment for reproducible data wrangling.</div>
+                                </li>
+                                <li>
+                                    <span class="list-icon">🐼</span>
+                                    <div><strong>Pandas & NumPy:</strong> Primary libraries utilized for automated data cleaning and structural transforms.</div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="visual-container gsap-pop">
-                        <div class="tape top-center"></div>
-                        <img data-src="assets/missing_data.png" alt="Missing Data Chart">
-                    </div>
                 </div>
-            </section>
-            
-            <section id="slide-7">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Text Formatting Issues</h2>
-                    <ul style="list-style:none; padding:0;">
-                        <li class="gsap-stagger-item"><span class="badge">⚠️</span> <code>YEAR</code> contained extra characters like parentheses and Roman numerals.</li>
-                        <li class="gsap-stagger-item"><span class="badge">⚠️</span> <code>VOTES</code> included comma separators for thousands.</li>
-                        <li class="gsap-stagger-item"><span class="badge">⚠️</span> <code>Gross</code> featured '$' prefixes and 'M' suffixes instead of raw numbers.</li>
-                    </ul>
-                </div>
-            </section>
-            
-            <section id="slide-8">
-                <h2 class="gsap-fade">Structural Issues</h2>
-                <div class="glass-panel gsap-slide-up">
-                    <p>The <code>GENRE</code> column had multiple genres grouped into a single comma-separated string, making genre-specific analysis difficult.</p>
-                    <div class="visual-container shadow-heavy">
-                        <div class="tape top-center blue-tape"></div>
-                        <img data-src="assets/genre_breakdown.png" alt="Genre Breakdown Issue">
-                    </div>
-                    <pre><code data-trim data-noescape>
-                    "Action, Adventure, Sci-Fi"
-                    </code></pre>
-                </div>
-            </section>
+            </div>
 
-            <!-- Topic 5: Tools & Methods -->
-            <section id="slide-9">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Cleaning Text Data</h2>
-                    <ul>
-                        <li class="gsap-stagger-item"><strong>Regex:</strong> Extracted valid 4-digit years using <code>(\d{4})</code>.</li>
-                        <li class="gsap-stagger-item"><strong>String Replacement:</strong> Stripped commas, '$', and 'M' symbols.</li>
-                        <li class="gsap-stagger-item"><strong>Type Conversion:</strong> Converted cleaned text columns into numeric types for calculations.</li>
-                    </ul>
+            <!-- Slide 3: Scope 3 - Present Data Set -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 3 • Present Data Set</span>
+                            <h2 class="slide-title">Dataset Overview & Features</h2>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="classroom-list">
+                            <div class="card-box highlight">
+                                <span class="stat-number">9,999</span>
+                                <div class="stat-desc">Total Movie & Show Records</div>
+                                <div class="stat-sub">Raw initial entries prior to cleaning</div>
+                            </div>
+                            <div class="card-box" style="margin-top:16px;">
+                                <h4>Key Attributes Analyzed:</h4>
+                                <p style="font-size:0.95rem; color:var(--text-muted); margin-top:8px;">
+                                    <code>MOVIES</code> (Title), <code>YEAR</code> (Release Date), <code>GENRE</code> (Categories), <code>RATING</code> (Imdb Score), <code>VOTES</code> (Audience Count), and <code>Gross</code> (Revenue in Millions).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="visual-aid">
+                            <img src="assets/year_distribution.png" alt="Timeline Distribution Chart">
+                        </div>
+                    </div>
                 </div>
-            </section>
-            
-            <section id="slide-10">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Structuring the Data</h2>
-                    <ul>
-                        <li class="gsap-stagger-item">Used Pandas' <code>.str.split(',')</code> and <code>.explode()</code> functions to split the <code>GENRE</code> column.</li>
-                        <li class="gsap-stagger-item">Transformed the dataset so each movie-genre pair has its own dedicated row (wide to long format).</li>
-                    </ul>
-                </div>
-            </section>
+            </div>
 
-            <!-- Topic 6: After Cleaning -->
-            <section id="slide-11">
-                <div class="glass-panel text-center gsap-pop" style="border: 2px solid #5cb85c;">
-                    <h2>The Final State</h2>
-                    <p>The data is now a clean, structured dataset saved as <code style="background:#5cb85c; color:#fff;">Cleaned_Dataset.csv</code>.</p>
+            <!-- Slide 4: Scope 4 - Process to Clean (Issues Identified) -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 4 • Process to Clean</span>
+                            <h2 class="slide-title">Identifying Missing & Duplicate Data</h2>
+                        </div>
+                    </div>
+                    <div class="grid-3">
+                        <div class="card-box alert">
+                            <span class="stat-number danger">431</span>
+                            <div class="stat-desc">Duplicate Rows Identified</div>
+                            <div class="stat-sub">Removed using <code>df.drop_duplicates()</code></div>
+                        </div>
+                        <div class="card-box alert">
+                            <span class="stat-number danger">9,539</span>
+                            <div class="stat-desc">Nulls in Gross Revenue</div>
+                            <div class="stat-sub">Over 95% missing revenue data points</div>
+                        </div>
+                        <div class="card-box alert">
+                            <span class="stat-number danger">1,820</span>
+                            <div class="stat-desc">Missing Ratings & Votes</div>
+                            <div class="stat-sub">Dropped rows lacking essential target metrics</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px;" class="visual-aid">
+                        <img src="assets/missing_data.png" alt="Missing Data Availability Chart">
+                    </div>
                 </div>
-            </section>
-            
-            <section id="slide-12">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">Readiness for Analysis</h2>
-                    <ul>
-                        <li class="gsap-stagger-item">✅ <code>YEAR</code>, <code>VOTES</code>, and <code>Gross</code> are numeric.</li>
-                        <li class="gsap-stagger-item">✅ With genres exploded, the dataset is fully prepared for feature extraction and machine learning predictions.</li>
-                    </ul>
-                </div>
-            </section>
+            </div>
 
-            <!-- Topic 7: Conclusion -->
-            <section id="slide-13">
-                <div class="glass-panel">
-                    <h2 class="gsap-fade">EDA Findings</h2>
-                    <p class="gsap-fade">We grouped the cleaned data by genre to calculate:</p>
-                    <ul>
-                        <li class="gsap-stagger-item">📈 Average Ratings</li>
-                        <li class="gsap-stagger-item">🙋 Total Votes</li>
-                        <li class="gsap-stagger-item">💵 Gross Profitability</li>
+            <!-- Slide 5: Scope 5 - Tools & Methods Used for Cleaning -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 5 • Cleaning Methods</span>
+                            <h2 class="slide-title">Methods & Tools Used to Clean</h2>
+                        </div>
+                    </div>
+                    <ul class="classroom-list">
+                        <li>
+                            <span class="list-icon">🔍</span>
+                            <div>
+                                <strong>Regex Year Extraction:</strong> Extracted exact 4-digit years from messy strings like <code>(2021– )</code> or <code>(2010–2022)</code> using regex pattern <code>r'(\d{4})'</code>.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">🧹</span>
+                            <div>
+                                <strong>Numeric Formatting:</strong> Stripped commas <code>,</code> from <code>VOTES</code> and removed <code>$</code> and <code>M</code> symbols from <code>Gross</code> revenue strings before numeric conversion.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">💥</span>
+                            <div>
+                                <strong>Genre Exploding:</strong> Splitted multi-genre values (e.g., <code>"Action, Adventure"</code>) with <code>.str.split(',')</code> and used pandas <code>.explode()</code> to create dedicated row entries for clean grouping.
+                            </div>
+                        </li>
                     </ul>
                 </div>
-            </section>
-            
-            <section id="slide-14">
-                <h2 class="gsap-fade">Metric Normalization</h2>
-                <div class="glass-panel gsap-slide-up">
-                    <p>To directly compare genres, we normalized the Average Rating and Average Gross on a <strong>0–1 scale</strong>.</p>
-                    <p>This allowed us to create a unified <strong>Combined Score</strong> metric.</p>
-                    <div class="visual-container">
-                        <div class="tape top-left yellow-tape"></div>
-                        <img data-src="assets/ratings_vs_gross.png" alt="Ratings vs Gross Scatter">
+            </div>
+
+            <!-- Slide 6: Scope 6 - After Cleaning -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 6 • After Cleaning</span>
+                            <h2 class="slide-title">Post-Cleaning State</h2>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="card-box success">
+                            <span class="stat-number success">8,157</span>
+                            <div class="stat-desc">Clean Usable Movies</div>
+                            <div class="stat-sub">Saved as <code>Cleaned_Dataset.csv</code></div>
+                        </div>
+                        <div class="card-box">
+                            <h3>Readiness for Machine Learning</h3>
+                            <ul class="classroom-list" style="margin-top:12px;">
+                                <li>
+                                    <span class="list-icon">✅</span>
+                                    <div>All numeric columns (<code>YEAR</code>, <code>VOTES</code>, <code>Gross</code>) properly typed.</div>
+                                </li>
+                                <li>
+                                    <span class="list-icon">✅</span>
+                                    <div>Exploded genre table yields 18,484 clean row instances for accurate feature extraction.</div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </section>
-            
-            <section id="slide-15">
-                <h2 class="gsap-fade">Top Performing Genres</h2>
-                <div class="stats-grid">
-                    <div class="stat-card success-card gsap-stagger-item" style="min-width:150px">
-                        <div class="tape top-center"></div>
-                        <p class="stat-value" style="font-size:2rem">Musical</p>
+            </div>
+
+            <!-- Slide 7: Scope 7 - Conclusion -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-header">
+                        <div>
+                            <span class="scope-badge">Scope 7 • Conclusion</span>
+                            <h2 class="slide-title">Exploratory Findings & Top Genres</h2>
+                        </div>
                     </div>
-                    <div class="stat-card success-card gsap-stagger-item" style="min-width:150px">
-                        <div class="tape top-center"></div>
-                        <p class="stat-value" style="font-size:2rem">Adventure</p>
-                    </div>
-                    <div class="stat-card success-card gsap-stagger-item" style="min-width:150px">
-                        <div class="tape top-center"></div>
-                        <p class="stat-value" style="font-size:2rem">Animation</p>
+                    <div class="grid-2">
+                        <div class="visual-aid">
+                            <img src="assets/top_genres.png" alt="Top Performing Genres Chart">
+                        </div>
+                        <div class="card-box">
+                            <h3>Key EDA Insights:</h3>
+                            <p style="margin-top:10px; color:var(--text-muted); line-height:1.6;">
+                                Normalized rating & gross revenue on a 0–1 scale to calculate a combined performance score. 
+                            </p>
+                            <div style="margin-top:16px;">
+                                <div style="font-weight:700; color:var(--success);">🏆 Top Performing Genres:</div>
+                                <div style="display:flex; gap:10px; margin-top:8px;">
+                                    <span class="scope-badge" style="background:rgba(16,185,129,0.2); border-color:var(--success); color:#34d399;">Musical</span>
+                                    <span class="scope-badge" style="background:rgba(16,185,129,0.2); border-color:var(--success); color:#34d399;">Adventure</span>
+                                    <span class="scope-badge" style="background:rgba(16,185,129,0.2); border-color:var(--success); color:#34d399;">Animation</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="visual-container gsap-pop">
-                    <div class="tape bottom-right blue-tape"></div>
-                    <img data-src="assets/top_genres.png" alt="Top Genres Chart">
+            </div>
+
+        </div>
+
+        <!-- Bottom Controls Bar -->
+        <div class="bottom-bar">
+            <div class="progress-track">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="controls-row">
+                <span class="slide-indicator" id="slide-indicator">Slide 1 / 7</span>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prev-btn">← Previous</button>
+                    <button class="nav-btn" id="next-btn">Next →</button>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
 
-    <!-- GSAP for Hyper Realistic Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
-    
-    <script>
-        Reveal.initialize({
-            hash: true,
-            controls: true,
-            progress: true,
-            center: true,
-            transition: 'none', // We will use GSAP instead
-            backgroundTransition: 'none',
-            plugins: []
-        });
+    <!-- Slide Overview Modal -->
+    <div class="modal" id="overview-modal">
+        <div class="modal-header">
+            <h2>Select Slide</h2>
+            <button class="icon-btn" id="close-overview">✕ Close</button>
+        </div>
+        <div class="overview-grid" id="overview-grid"></div>
+    </div>
 
-        // Add 3D Mouse Parallax effect to the entire reveal container
-        document.addEventListener("mousemove", (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
-            gsap.to(".reveal", {
-                rotationY: x,
-                rotationX: y,
-                ease: "power1.out",
-                transformPerspective: 900,
-                transformOrigin: "center"
-            });
-        });
-
-        // Trigger GSAP animations on slide change
-        Reveal.on('slidechanged', event => {
-            const currentSlide = event.currentSlide;
-            
-            // Re-trigger fade elements
-            gsap.fromTo(currentSlide.querySelectorAll('.gsap-fade'), 
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }
-            );
-
-            // Re-trigger pop elements (3D effect)
-            gsap.fromTo(currentSlide.querySelectorAll('.gsap-pop'),
-                { scale: 0.8, opacity: 0, rotationZ: -2, z: -100 },
-                { scale: 1, opacity: 1, rotationZ: 0, z: 0, duration: 1, ease: "elastic.out(1, 0.5)", stagger: 0.15 }
-            );
-
-            // Re-trigger slide up
-            gsap.fromTo(currentSlide.querySelectorAll('.gsap-slide-up'),
-                { opacity: 0, y: 100, rotationX: -10 },
-                { opacity: 1, y: 0, rotationX: 0, duration: 0.8, ease: "power3.out" }
-            );
-
-            // Re-trigger staggers
-            gsap.fromTo(currentSlide.querySelectorAll('.gsap-stagger-item'),
-                { opacity: 0, x: -20 },
-                { opacity: 1, x: 0, duration: 0.5, ease: "power2.out", stagger: 0.1 }
-            );
-        });
-
-        // Trigger initial animation for first slide
-        Reveal.on('ready', event => {
-            setTimeout(() => {
-                gsap.fromTo(".title-slide .glass-panel", 
-                    { opacity: 0, scale: 0.9, y: 50 },
-                    { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power4.out" }
-                );
-            }, 100);
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
